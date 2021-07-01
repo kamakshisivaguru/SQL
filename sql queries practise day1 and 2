@@ -1,0 +1,49 @@
+Write a query to display the names of those students that are between the ages of 18 and 20.
+
+
+SELECT student_name,age
+FROM students
+WHERE age>=18 and age<=20;
+
+
+
+Write a query that displays only the state with the largest amount of fruit supply.
+
+SELECT state, max(supply)
+FROM fruit_imports
+GROUP BY STATE
+ORDER BY MAX(supply)desc
+LIMIT 1;
+
+Write a query that returns the most expensive cost_per_unit of every season. 
+The query should display 2 columns, the season and the cost_per_unit
+
+SELECT * from fruit_imports;
+
+SELECT season, max(cost_per_unit) 
+FROM fruit_imports
+GROUP BY season
+ORDER BY max(cost_per_unit) desc;
+
+Write a query that returns the state that has more than 1 import of the same fruit.
+
+Select count(name),state
+from fruit_imports
+group by state;
+
+Write a query that returns the seasons that produce either 3 fruits or 4 fruits.
+
+select  season,count(name)
+from fruit_imports
+group by season
+order by count(name)desc
+limit 3;
+
+Write a query that takes into consideration the supply and cost_per_unit columns for determining the total cost 
+and returns the most expensive state with the total cost.
+
+select state,round(supply * cost_per_unit)as total_cost
+from fruit_imports
+group by state,total_cost
+order by total_cost desc
+limit  1;
